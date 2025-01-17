@@ -1,0 +1,192 @@
+from Graficadora_de_Funciones_Complejas import *
+########################################   Funciones generadas con antelacion
+# Funcion 0
+def f0(z):
+  return z
+
+# Funcion 1
+def f1(z):
+    return z**2
+
+# Funcion 2 (0<|z|<1)
+def f2(z):
+    return 1/z
+
+# Funcion 3 (z; 0<Im(z)<2pi)
+def f3(z):
+    x,y = split(z)
+
+    return x+y
+
+# Funcion 4
+f4 = build_pol_coef([1,1,0,0])
+
+# Funcion 5
+def f5(z):
+    return z/(1 + 5*z)
+
+# Funcion 6
+def f6(z):
+    return sen_c(z)/cos_c(z)
+
+# Funcion 7
+a_7 = 5 + 3j
+b_7 = 1 + 9j
+def f7(z):
+    return a_7*z + b_7
+
+# Funcion 8
+a_8 = 1 + 2j
+b_8 = 3 + 0j
+c_8 = 3 + 1j
+d_8 = 0 + 1j
+
+f8 = build_Moebius(a_8,b_8,c_8,d_8)
+
+# Funcion 9 (|z| < 1)
+theta = 2*pi
+z0 = 1 + 2j
+
+def f9(z):
+    return exp_c(theta*1j) * (z-z0)/(1-conjug(z0)*z)
+
+# Funcion 10
+def f10(z):
+    return (z-1)/(z+1)
+
+# Funcion 11
+def f11(z):
+    return (z-1j)/(z+1j)
+
+# Funcion 12
+def f12(z):
+    return (2*z - 1)/(2 - z)
+
+# Funcion 13
+alpha = 12 + 4j
+def f13(z):
+    return alpha*(z + 1/z)
+
+# Funcion 14
+def f14(z):
+    return (z-1)/(z+1)
+
+# Funcion 15
+def f15(z):
+    return (z+3)/(z-1)
+
+# Funcion 16
+def f16(z):
+    return (z**2 - 1)**(1/2)
+########################################
+
+
+
+
+######################################## Ejemplos preparados
+
+############## Generacion de una malla
+c_malla = 0   # Centro de la malla
+r_malla = .05  # La distancia entre las rectas esta dada por 2*r
+n_malla = 12  # Numero de rectas horiztonales y numero de rectas verticales (Si n es inpar, las rectas centrasles pasaran por c)
+l_malla = 1  # Largo de las recta
+Malla = build_malla(c_malla, r_malla, l_malla, n_malla)
+# El intervalo para esta malla sera [0,2*n_malla)
+
+#graficadora(Malla, 0, 2*n_malla, f2, continua = False)
+#graficadora_slider(Malla, 0, 2*n_malla, f2, continua = False)
+
+############## Generacion de una malla polar
+c_malla_p = 0   # Centro de la malla polar
+n_r = 10  # Cantidad de semi circulos
+d_r = 5  # Distancia entre los semi circulos
+theta_0 = -pi/2  # Angulo inicial para los rayos y semi circulos
+theta_1 = pi/2 # Angulo final para los rayos y semi circulos
+n_theta = 10 # Numero de rayos
+Malla_polar = build_malla_polar(c_malla_p, n_r, d_r, theta_0, theta_1, n_theta)
+# El intervalo para esta malla polar sera [0, n_theta + n_r)
+
+
+#graficadora(Malla_polar, 0, n_theta + n_r, exp_c, continua = False)
+#graficadora_slider(Malla_polar,  0, n_theta + n_r, exp_c, continua = False)
+
+############# Generacion de circunferencias concentricas
+c_circunferencias = 0   # Centro de las circunferencias
+r_circunferencias = 5   # Distancia entre cada circunferencia (incluida la primera con el centro)
+n_circunferencias = 3   # Numero de circunferencias
+Circunferencias = build_circunferencias_concentricas(c_circunferencias,r_circunferencias)
+# El intervalo para estas circunferencias sera [0,n_circunferencias)
+
+#graficadora(Circunferencias, 0, 2*n_circunferencias, f2, continua = False)
+#graficadora_slider(Circunferencias, 0, 2*n_circunferencias, f2, continua = False)
+
+############# Generacion de circunferencias
+c_circunferencia = 0   # Centro de las circunferencia
+r_circunferencia = 5   # Radio de la circunferencia
+Circunferencia = build_Circle(c_circunferencia,r_circunferencia)
+# El intervalo para estas circunferencias sera [0,n_circunferencias)
+
+#graficadora(Circunferencia, 0, 2*pi, f0, continua = True)
+#graficadora_slider(Circunferencia, 0, 2*pi, f0, continua = FaTruelse)
+
+############## Generacion de rectas paralelas
+start = 5       # Inicio de la recta base
+end = 15 + 10j  # Final de la recta base
+a = 10          # Extremo inicial del intervalo de la recta
+b = 20          # Extremo final del intervalo de la recta
+Recta = build_Recta(start, end, a, b)
+n_rectas = 3 # Numero de rectas a la izquierda y a la derecha
+r_rectas = 2 # Distancia entre las rectas
+Paralelas = build_rectas_paralelas(Recta, a, b, n_rectas, r_rectas)
+# El intervalo para las rectas es [0,2*n_rectas+1)
+
+#graficadora(Paralelas, 0, 2*n_rectas+1, f2, continua = False)
+#graficadora_slider(Paralelas, 0, 2*n_rectas+1, f2, continua = False)
+
+############## Generacion de grafica 3d
+def funcion_3d(z):
+  return z**2
+
+#X, Y = get_square_for_3d([-2,2],[-2,2])
+X, Y = get_disc_for_3d(5,[0,0])
+#graficadora_3d(X, Y, funcion_3d, Im, a = pi)
+
+############## Generacion de grafica 3d para K
+# Caso z^3
+
+u1 = x0**3 - 3*x0*(y0**2)
+v1 = 3*y0*(x0**2) - y0**3
+
+# Caso z^2
+
+u2 = x0**2 - y0**2
+v2 = 2*x0*y0
+
+
+# Caso 1/z
+
+u3 = x0/(x0**2 + y0**2)
+v3 = -y0/(x0**2 + y0**2)
+
+
+# Caso 1/z^2
+
+u4 = (x0**2 - y0**2)/((x0**2 + y0**2)**2)
+v4 = (-2*x0*y0)/((x0**2 + y0**2)**2)
+
+
+# Caso 1/10 * (z + i + 1)*(z - i + 1)*(z + i - 1)*(z - i - 1)
+
+u5 = 1/10*(x0**4) - 3/5*(x0**2)*(y0**2) + 1/10*(y0**4) + 2/5
+v5 = 2/5*(x0**3)*y0 - 2/5*x0*(y0**3)
+
+
+# Caso 1/4 * (z + 2)*(z - 2*i)*(z - 2)
+
+u6 = 1/4*(x0**3) - 3/4*x0*(y0**2) + x0*y0 - x0
+v6 = 3/4*(x0**2)*y0 - 1/4*(y0**3) - 1/2*(x0**2) + 1/2*(y0**2) - y0 + 2
+
+#X, Y = get_square_for_3d([-2,2],[-2,2])
+X, Y = get_disc_for_3d(5,[0,0])
+
+#graficadora_3d_K(X,Y,u1,v1)
